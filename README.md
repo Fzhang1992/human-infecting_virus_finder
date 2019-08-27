@@ -1,5 +1,5 @@
 # human-infecting virus finder
-Version: 1.2
+Version: 1.1.1
 
 Authors: Zheng Zhang, Zena Cai, Zhiying Tan, Taijiao Jiang, Guihua Zhang, Yousong Peng
 
@@ -25,17 +25,21 @@ Installation
 To install "pandas", "numpy" and "sklearn", open terminal and input,
 
 	conda install pandas
+	or
 	pip install pandas
 
 	conda install numpy
+	or
 	pip install numpy
 
 	conda install scikit-learn
+	or
 	pip install -U scikit-learn
 
 To install "imblearn", open terminal and input,
 
 	conda install -c glemaitre imbalanced-learn
+	or
 	pip install -U imbalanced-learn
 
 
@@ -71,8 +75,13 @@ The viral genomes containing human-infecting virus and other viruses were split 
 
 Usage
 -----------
-python predResult.py --query test --output predict_result --file mod_data --kmer 4 --kjob 1 --bjob 1
+### example command
 
+	python predResult.py --query test --output predict_result --file mod_data --kmer 4 --kjob 1 --bjob 1
+
+
+Arguments
+-----------
 --query The file of query sequences.
 
 --output  The name of the predict result file.
