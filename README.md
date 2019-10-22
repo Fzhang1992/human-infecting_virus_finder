@@ -100,8 +100,10 @@ Description
 The function identifies human-infecting virus contig in the input file using the model trained based on the viral genomes.
 
 The rows correspond to sequences, and the columns are from the left to the right, sequence name (Name), using model (Model), prediction result (Label) and prediction probability (Probability).
-When the prediction result is "1" and prediction probability more close to 1, mean the model predicts this query sequence is human-infecting viral sequence and this prediction result is more confidence.
-When the prediction result is "0" and prediction probability more close to 0, mean the model predicts this query sequence is other viral sequence and this prediction result is more confidence.
+
+When the prediction result is "1" and prediction probability more close to 1, mean the model predicts this query sequence more likely a human-infecting viral sequence.
+
+When the prediction result is "0" and prediction probability more close to 0, mean the model predicts this query sequence more likely a non-human-infecting viral sequence.
  
 For a query sequence of length L: if L<1kb, the model trained by 500bp sequences is used to predict; if 1kb<=L<3kb, the model trained by 1000bp sequences is used to predict; if 3kb<=L<5kb, the model trained by 3000bp sequences is used to predict; if 5kb<=L<10kb, the model trained by 5000bp sequences is used by predict; if 10kb<=L<15kb, the model trained by 10000bp sequences is used to predict; if L>=15kb, the model trained by the viral genome is used to predict.
 
