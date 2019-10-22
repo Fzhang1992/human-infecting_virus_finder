@@ -36,23 +36,29 @@ for op, value in opts:
 test_500, test_1000,test_3000,test_5000,test_10000,test_genome = [],[],[],[],[],[]
 
 file = open(''+query+'','r')
+query_name = []
 for line in file:
-    if len(line)-1 < 1000:
-        test_500.append(line)
-    elif len(line)-1 < 3000:
-        test_1000.append(line)
-    elif len(line)-1 < 5000:
-        test_3000.append(line)
-    elif len(line)-1 < 10000:
-        test_5000.append(line)
-    elif len(line)-1 < 15000:
-        test_10000.append(line)
+    line = line.strip('\n')
+    if line[0] == '>':#save the query name
+        name = line
+        query_name.append(line)
+        continue
+    if len(line) < 1000:
+        test_500.append(name+' '+line)
+    elif len(line) < 3000:
+        test_1000.append(name+' '+line)
+    elif len(line) < 5000:
+        test_3000.append(name+' '+line)
+    elif len(line) < 10000:
+        test_5000.append(name+' '+line)
+    elif len(line) < 15000:
+        test_10000.append(name+' '+line)
     else:
-        test_genome.append(line)
+        test_genome.append(name+' '+line)
 file.close()
 
-result = pd.read_csv(''+query+'',sep = ' ',header = None,index_col = False)
-result.index = result.iloc[:,0]+'_str'#avoid queryIDs are int
+result = pd.DataFrame({"name":query_name})
+result.index = result.iloc[:,0]
 
 ###########################################################
 lengths = [test_500,test_1000,test_3000,test_5000,test_10000,test_genome]
@@ -94,7 +100,7 @@ for ll in range(len(lengths)):
         X_test = np.array(data.iloc[:,1:])
         y_pred = np.array(model.predict(X_test))
         pred_data = pd.DataFrame(data.iloc[:,0])
-        pred_data.index = data.iloc[:,0]+'_str'
+        pred_data.index = data.iloc[:,0]
         pred_data.drop([0],axis=1, inplace=True)
         pred_data['model'] = piece[ll]
         pred_data['label'] = y_pred
@@ -109,8 +115,7 @@ for ll in range(len(lengths)):
     del data, X_test
 #print the predict result
 result = result.join(pred_result)
-result.index = result.iloc[:,0]
-result.drop([0,1],axis=1, inplace=True)
+result.drop("name",axis=1, inplace=True)
 result.index.name = 'name'
 result.to_csv(''+output+'',sep = '\t',header = True,index = True)
 
