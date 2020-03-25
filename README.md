@@ -1,4 +1,4 @@
-# human-infecting virus finder
+# humanVirusFinder 
 Version: 1.2
 
 Authors: Zheng Zhang, Zena Cai, Zhiying Tan, Taijiao Jiang, Guihua Zhang, Yousong Peng
